@@ -14,6 +14,7 @@ string Basket = @"\__/";
 int points = 0;
 int lives = 5;
 
+
 var firstStar = new Star(windowHeight);
 
 
@@ -24,7 +25,6 @@ while (!exitGame)
 {
     MoveBasket();
     StarFall(firstStar);
-
 }
 
 Console.WriteLine($"Game ended! Your points are {points}");
@@ -72,7 +72,7 @@ void StarFall(Star firstStar)
     {
         // if(firstStar.PositionY  == windowHeight/2)
         // {
-          
+
         //     StarFall(new Star(windowHeight));
         // }
         if (firstStar.PositionY < windowHeight - 1)
@@ -101,9 +101,9 @@ void StarFall(Star firstStar)
 void PointSystem(Star star)
 {
     List<int> validPositions = new();
-    for(var i = 0; i < Basket.Length; i++)
+    for (var i = 0; i < Basket.Length; i++)
     {
-         validPositions.Add(basketPosition + i);
+        validPositions.Add(basketPosition + i);
     }
 
     if (lives < 1)
