@@ -90,15 +90,21 @@ void StarFall()
 
 void PointSystem()
 {
+    List<int> validPositions = new();
+    for(var i = 0; i < Basket.Length; i++)
+    {
+         validPositions.Add(basketPosition + i);
+    }
+
     if (lives < 1)
     {
         exitGame = true;
     }
-    else if (starPositionY == windowHeight - 2 && starPositionX == basketPosition)
+    else if (starPositionY == windowHeight - 2 && validPositions.Any(position => position == starPositionX))
     {
         points += 1;
     }
-    else if (starPositionY == windowHeight - 2 && starPositionX != basketPosition)
+    else if (starPositionY == windowHeight - 2 && validPositions.Any(position => position != starPositionX))
     {
         lives -= 1;
     }
