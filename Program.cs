@@ -1,11 +1,9 @@
-﻿
+﻿using MyFirstGame;
 
 Console.CursorVisible = false;
 
 int windowWidth = Console.BufferWidth;
 int windowHeight = Console.BufferHeight - 2;
-
-var randomizer = new Random();
 
 int basketPosition = windowWidth / 2;
 
@@ -15,6 +13,8 @@ string Basket = @"\__/";
 int points = 0;
 int lives = 5;
 
+Star firstStar = new Star(){PositionX = randomizer.Next(windowWidth)};
+
 
 
 Console.SetCursorPosition(basketPosition, windowHeight);
@@ -23,11 +23,13 @@ Console.Write(Basket);
 while (!exitGame)
 {
     MoveBasket();
-    StarFall();
+    StarFall(firstStar);
 
 }
 
 Console.WriteLine($"Game ended! Your points are {points}");
+
+
 
 void MoveBasket()
 {
@@ -64,28 +66,29 @@ void DeleteStar(int heightPosition)
     Console.Write("\r" + new string(' ', Console.WindowWidth) + "\r");
 }
 
-void StarFall()
+void StarFall(Star star)
 {
     while (!Console.KeyAvailable)
     {
-        if(firstStarPositionY  == windowHeight/2)
+        if(star.PositionY  == windowHeight/2)
         {
-            StarFall()
+            var nextStar = new Star(){PositionX = randomizer.Next(windowWidth)};
+            StarFall(nextStar);
         }
-        if (firstStarPositionY < windowHeight - 1)
+        if (star.PositionY < windowHeight - 1)
         {
-            firstStarPositionY += 1;
+            star.PositionY += 1;
         }
         else
         {
-            firstStarPositionY = 1;
+            star.PositionY = 1;
             DeleteStar(windowHeight - 1);
         }
 
         Thread.Sleep(250);
-        Console.SetCursorPosition(firstStarPositionX, firstStarPositionY);
+        Console.SetCursorPosition(star.PositionX, star.PositionY);
         Console.WriteLine('*');
-        DeleteStar(firstStarPositionY - 1);
+        DeleteStar(star.PositionY - 1);
 
         PointSystem();
         if (exitGame)
@@ -106,11 +109,11 @@ void PointSystem()
     {
         exitGame = true;
     }
-    else if (firstStarPositionY == windowHeight - 2 && validPositions.Any(position => position == firstStarPositionX))
+    else if (firstStar.PositionY == windowHeight - 2 && validPositions.Any(position => position == firstStar.PositionX))
     {
         points += 1;
     }
-    else if (firstStarPositionY == windowHeight - 2 && validPositions.Any(position => position != firstStarPositionX))
+    else if (firstStar.PositionY == windowHeight - 2 && validPositions.Any(position => position != firstStar.PositionX))
     {
         lives -= 1;
     }
