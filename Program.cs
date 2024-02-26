@@ -8,6 +8,20 @@ while (!Console.KeyAvailable)
 {
     Console.CursorVisible = false;
 
+    StarFall();
+
+
+}
+
+
+void DeleteStar(int heightPosition)
+{
+    Console.SetCursorPosition(0, heightPosition);
+    Console.Write("\r" + new string(' ', Console.WindowWidth) + "\r");
+}
+
+void StarFall()
+{
     if (position < windowHeight - 2)
     {
         position += 1;
@@ -22,11 +36,4 @@ while (!Console.KeyAvailable)
     Console.SetCursorPosition(windowWidth / 2, position);
     Console.WriteLine('*');
     DeleteStar(position - 1);
-}
-
-
-void DeleteStar(int heightPosition)
-{
-    Console.SetCursorPosition(0, heightPosition);
-    Console.Write("\r" + new string(' ', Console.WindowWidth) + "\r");
 }
