@@ -60,14 +60,14 @@ void DeleteStar(int heightPosition)
 
 void StarFall()
 {
-    if (starPosition < windowHeight)
+    if (starPosition < windowHeight -1)
     {
         starPosition += 1;
     }
     else
     {
         starPosition = 1;
-        DeleteStar(windowHeight);
+        DeleteStar(windowHeight -1);
     }
 
     Thread.Sleep(500);
