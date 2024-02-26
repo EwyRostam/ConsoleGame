@@ -20,13 +20,12 @@ Console.Write(Basket);
 
 while (!exitGame)
 {
-    while (!Console.KeyAvailable)
-    {
-        StarFall();
-    }
-
     MoveBasket();
+    StarFall();
+
 }
+
+Console.WriteLine($"Game ended! Your points are {points}");
 
 void MoveBasket()
 {
@@ -65,35 +64,43 @@ void DeleteStar(int heightPosition)
 
 void StarFall()
 {
-    if (starPositionY < windowHeight -1)
+    while (!Console.KeyAvailable)
     {
-        starPositionY += 1;
-    }
-    else
-    {
-        starPositionY = 1;
-        DeleteStar(windowHeight -1);
+        if (starPositionY < windowHeight - 1)
+        {
+            starPositionY += 1;
+        }
+        else
+        {
+            starPositionY = 1;
+            DeleteStar(windowHeight - 1);
+        }
+
+        Thread.Sleep(250);
+        Console.SetCursorPosition(starPositionX, starPositionY);
+        Console.WriteLine('*');
+        DeleteStar(starPositionY - 1);
+
+        PointSystem();
+        if (exitGame)
+            break;
     }
 
-    Thread.Sleep(500);
-    Console.SetCursorPosition(starPositionX, starPositionY);
-    Console.WriteLine('*');
-    DeleteStar(starPositionY - 1);
 }
 
 void PointSystem()
 {
-    if(lives < 1)
+    if (lives < 1)
     {
         exitGame = true;
     }
-    else if(starPositionY == windowHeight -2 && starPositionX == basketPosition)
+    else if (starPositionY == windowHeight - 2 && starPositionX == basketPosition)
     {
         points += 1;
     }
-    else if(starPositionY == windowHeight -2 && starPositionX != basketPosition)
+    else if (starPositionY == windowHeight - 2 && starPositionX != basketPosition)
     {
         lives -= 1;
     }
-    
+
 }
