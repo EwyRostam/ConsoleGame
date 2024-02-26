@@ -2,11 +2,16 @@
 int windowWidth = Console.BufferWidth;
 int windowHeight = Console.BufferHeight - 2;
 
-int starPosition = 1;
+int starPositionX = windowWidth / 2;
+int starPositionY = 1;
+
 int basketPosition = windowWidth / 2;
 
 bool exitGame = false;
 string Basket = @"\__/";
+
+int points = 0;
+int lives = 5;
 
 var randomizer = new Random();
 
@@ -60,18 +65,35 @@ void DeleteStar(int heightPosition)
 
 void StarFall()
 {
-    if (starPosition < windowHeight -1)
+    if (starPositionY < windowHeight -1)
     {
-        starPosition += 1;
+        starPositionY += 1;
     }
     else
     {
-        starPosition = 1;
+        starPositionY = 1;
         DeleteStar(windowHeight -1);
     }
 
     Thread.Sleep(500);
-    Console.SetCursorPosition(windowWidth / 2, starPosition);
+    Console.SetCursorPosition(starPositionX, starPositionY);
     Console.WriteLine('*');
-    DeleteStar(starPosition - 1);
+    DeleteStar(starPositionY - 1);
+}
+
+void PointSystem()
+{
+    if(lives < 1)
+    {
+        exitGame = true;
+    }
+    else if(starPositionY == windowHeight -2 && starPositionX == basketPosition)
+    {
+        points += 1;
+    }
+    else if(starPositionY == windowHeight -2 && starPositionX != basketPosition)
+    {
+        lives -= 1;
+    }
+    
 }
