@@ -19,7 +19,17 @@ while (!Console.KeyAvailable)
     switch(move)
     {
         case ConsoleKey.LeftArrow :
+        DeleteStar(windowHeight);
+        basketPosition -= 1;
+        break;
 
+        case ConsoleKey.RightArrow :
+        DeleteStar(windowHeight);
+        basketPosition += 1;
+        break;
+
+        default:
+        break;
     }
     
 }
