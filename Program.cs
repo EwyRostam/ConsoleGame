@@ -1,15 +1,11 @@
-﻿Console.CursorVisible = false;
+﻿
+
+Console.CursorVisible = false;
 
 int windowWidth = Console.BufferWidth;
 int windowHeight = Console.BufferHeight - 2;
 
 var randomizer = new Random();
-
-int nextStarPositionX = randomizer.Next(windowWidth);
-int nextStarPositionY = 1;
-
-int firstStarPositionX = randomizer.Next(windowWidth);
-int firstStarPositionY = 1;
 
 int basketPosition = windowWidth / 2;
 
@@ -72,6 +68,10 @@ void StarFall()
 {
     while (!Console.KeyAvailable)
     {
+        if(firstStarPositionY  == windowHeight/2)
+        {
+            StarFall()
+        }
         if (firstStarPositionY < windowHeight - 1)
         {
             firstStarPositionY += 1;
