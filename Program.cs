@@ -41,13 +41,13 @@ void MoveBasket()
             break;
     }
 
-    Console.SetCursorPosition(lastPosition, 0);
+    Console.SetCursorPosition(lastPosition, windowHeight);
     for (int i = 0; i < Basket.Length; i++)
     {
         Console.Write(" ");
     }
 
-    Console.SetCursorPosition(basketPosition, 0);
+    Console.SetCursorPosition(basketPosition, windowHeight);
     Console.Write(Basket);
 }
 
