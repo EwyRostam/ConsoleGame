@@ -1,5 +1,5 @@
 ﻿int windowWidth = Console.BufferWidth;
-int windowHeight = Console.BufferHeight;
+int windowHeight = Console.BufferHeight -2;
 int position = 1;
 
 var randomizer = new Random();
@@ -10,7 +10,8 @@ while (!Console.KeyAvailable)
 
     StarFall();
 
-
+    Console.SetCursorPosition(windowWidth / 2, windowHeight);
+    Console.WriteLine('*');
 }
 
 
@@ -22,14 +23,14 @@ void DeleteStar(int heightPosition)
 
 void StarFall()
 {
-    if (position < windowHeight - 2)
+    if (position < windowHeight)
     {
         position += 1;
     }
     else
     {
         position = 1;
-        DeleteStar(windowHeight - 2);
+        DeleteStar(windowHeight);
     }
 
     Thread.Sleep(500);
