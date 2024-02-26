@@ -1,6 +1,7 @@
 ﻿int windowWidth = Console.BufferWidth;
 int windowHeight = Console.BufferHeight -2;
 int position = 1;
+string Basket = @"\__/";
 
 var randomizer = new Random();
 
@@ -11,7 +12,7 @@ while (!Console.KeyAvailable)
     StarFall();
 
     Console.SetCursorPosition(windowWidth / 2, windowHeight);
-    Console.WriteLine('*');
+    Console.WriteLine(Basket);
 }
 
 
