@@ -1,37 +1,54 @@
-﻿int windowWidth = Console.BufferWidth;
-int windowHeight = Console.BufferHeight -2;
+﻿Console.CursorVisible = false;
+int windowWidth = Console.BufferWidth;
+int windowHeight = Console.BufferHeight - 2;
+
 int starPosition = 1;
-int basketPosition = windowWidth/2;
+int basketPosition = windowWidth / 2;
+
+bool exitGame = false;
 string Basket = @"\__/";
 
 var randomizer = new Random();
 
-while (!Console.KeyAvailable)
+Console.SetCursorPosition(basketPosition, windowHeight);
+Console.Write(Basket);
+
+while (!exitGame)
 {
-    Console.CursorVisible = false;
-
-    StarFall();
-
-    Console.SetCursorPosition(basketPosition, windowHeight);
-    Console.WriteLine(Basket);
-    ConsoleKey move = Console.ReadKey().Key;
-
-    switch(move)
+    while (!Console.KeyAvailable)
     {
-        case ConsoleKey.LeftArrow :
-        DeleteStar(windowHeight);
-        basketPosition -= 1;
-        break;
-
-        case ConsoleKey.RightArrow :
-        DeleteStar(windowHeight);
-        basketPosition += 1;
-        break;
-
-        default:
-        break;
+        StarFall();
     }
-    
+
+    MoveBasket();
+}
+
+void MoveBasket()
+{
+    int lastPosition = basketPosition;
+
+    switch (Console.ReadKey().Key)
+    {
+        case ConsoleKey.LeftArrow:
+            basketPosition -= 1;
+            break;
+
+        case ConsoleKey.RightArrow:
+            basketPosition += 1;
+            break;
+        case ConsoleKey.Escape:
+            exitGame = true;
+            break;
+    }
+
+    Console.SetCursorPosition(lastPosition, 0);
+    for (int i = 0; i < Basket.Length; i++)
+    {
+        Console.Write(" ");
+    }
+
+    Console.SetCursorPosition(basketPosition, 0);
+    Console.Write(Basket);
 }
 
 
