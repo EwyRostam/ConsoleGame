@@ -3,7 +3,12 @@
 int windowWidth = Console.BufferWidth;
 int windowHeight = Console.BufferHeight - 2;
 
-int firstStarPositionX = windowWidth / 2;
+var randomizer = new Random();
+
+int nextStarPositionX = randomizer.Next(windowWidth);
+int nextStarPositionY = 1;
+
+int firstStarPositionX = randomizer.Next(windowWidth);
 int firstStarPositionY = 1;
 
 int basketPosition = windowWidth / 2;
@@ -14,7 +19,7 @@ string Basket = @"\__/";
 int points = 0;
 int lives = 5;
 
-var randomizer = new Random();
+
 
 Console.SetCursorPosition(basketPosition, windowHeight);
 Console.Write(Basket);
